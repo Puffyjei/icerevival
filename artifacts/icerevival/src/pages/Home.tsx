@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { MinecraftButton } from '@/components/MinecraftButton';
 import { SnowfallEffect } from '@/components/SnowfallEffect';
 import { FeatureCard } from '@/components/FeatureCard';
+import { ServerStatus } from '@/components/ServerStatus';
 import { Shield, DollarSign, Mic, MessageCircle, Copy, Check } from 'lucide-react';
 
 const SERVER_IP = 'icerevival.aternos.me';
@@ -72,7 +73,7 @@ export default function Home() {
           </motion.div>
 
           <motion.p 
-            className="text-xl md:text-2xl mb-12 text-blue-100"
+            className="text-xl md:text-2xl mb-16 text-blue-100"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -85,50 +86,50 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="bg-black/40 backdrop-blur-sm border-4 border-white/20 p-8 mb-8 inline-block"
+            className="flex flex-col items-center gap-6 mb-8"
           >
-            <p 
-              className="text-sm text-blue-200 mb-3 uppercase tracking-wider"
-              style={{ fontFamily: 'Minecraft, monospace' }}
-            >
-              Server IP
-            </p>
-            <p 
-              className="text-3xl md:text-4xl font-bold text-white mb-6 select-all"
-              style={{ fontFamily: 'Minecraft, monospace' }}
-            >
-              {SERVER_IP}
-            </p>
-            
-            <MinecraftButton 
-              onClick={copyToClipboard}
-              variant="primary"
-              testId="button-copy-ip-hero"
-            >
-              {copied ? (
-                <span className="flex items-center gap-2">
-                  <Check size={20} /> Copied!
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  <Copy size={20} /> Copy IP
-                </span>
-              )}
-            </MinecraftButton>
+            <div className="flex items-center gap-4">
+              <p 
+                className="text-3xl md:text-4xl font-bold text-white select-all"
+                style={{ fontFamily: 'Minecraft, monospace' }}
+                data-testid="text-server-ip"
+              >
+                {SERVER_IP}
+              </p>
+              <div className="h-8 w-px bg-white/30" />
+              <MinecraftButton 
+                onClick={copyToClipboard}
+                variant="primary"
+                testId="button-copy-ip-hero"
+              >
+                {copied ? (
+                  <span className="flex items-center gap-2">
+                    <Check size={18} /> Copied
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <Copy size={18} /> Copy
+                  </span>
+                )}
+              </MinecraftButton>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="inline-block bg-accent/20 backdrop-blur-sm border-2 border-accent/40 px-6 py-3"
+            className="flex flex-wrap items-center justify-center gap-4"
           >
-            <p 
-              className="text-accent font-bold text-lg"
-              style={{ fontFamily: 'Minecraft, monospace' }}
-            >
-              Java 1.21.1+
-            </p>
+            <div className="inline-block bg-accent/20 backdrop-blur-sm border-2 border-accent/40 px-6 py-3">
+              <p 
+                className="text-accent font-bold text-lg"
+                style={{ fontFamily: 'Minecraft, monospace' }}
+              >
+                Java 1.21.1+
+              </p>
+            </div>
+            <ServerStatus mode="badge" />
           </motion.div>
 
           <motion.div
@@ -163,6 +164,57 @@ export default function Home() {
         }}
       >
         <div className="max-w-6xl mx-auto">
+          {/* Server Status & Wake Up Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mb-20"
+          >
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Live Status Panel */}
+              <ServerStatus mode="panel" />
+
+              {/* Wake Server Panel */}
+              <div 
+                className="bg-card border-4 border-[#3a2a1a] p-6"
+                style={{
+                  borderTopColor: '#6a5a4a',
+                  borderLeftColor: '#6a5a4a',
+                  borderRightColor: '#2a1a0a',
+                  borderBottomColor: '#2a1a0a',
+                }}
+              >
+                <h3 
+                  className="text-2xl font-bold mb-4 text-primary"
+                  style={{ fontFamily: 'Minecraft, monospace' }}
+                >
+                  Wake the Server
+                </h3>
+                <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
+                  IceRevival runs on Aternos and sleeps when no one is online. Click below to open the Aternos start page and wake it up.
+                </p>
+                <a 
+                  href="https://aternos.org/go/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  data-testid="link-wake-server"
+                >
+                  <MinecraftButton 
+                    variant="secondary"
+                    testId="button-open-aternos"
+                  >
+                    Open Aternos
+                  </MinecraftButton>
+                </a>
+                <p className="text-xs text-muted-foreground mt-4">
+                  The server takes ~30 seconds to start after waking.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Features Section */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
