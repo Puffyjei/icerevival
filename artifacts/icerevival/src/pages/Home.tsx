@@ -8,7 +8,7 @@ import { Shield, DollarSign, Mic, MessageCircle, Copy, Check, ExternalLink } fro
 
 // ============================================================
 // DISCORD LINK — change this to your server's invite URL
-const DISCORD_LINK = 'https://discord.gg/your-invite-here';
+const DISCORD_LINK = 'https://discord.gg/7zHkcBWBE4';
 // ============================================================
 
 const SERVER_IP = 'icerevival.aternos.me';
