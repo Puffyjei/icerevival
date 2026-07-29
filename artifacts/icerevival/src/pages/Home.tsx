@@ -4,7 +4,12 @@ import { MinecraftButton } from '@/components/MinecraftButton';
 import { SnowfallEffect } from '@/components/SnowfallEffect';
 import { FeatureCard } from '@/components/FeatureCard';
 import { ServerStatus } from '@/components/ServerStatus';
-import { Shield, DollarSign, Mic, MessageCircle, Copy, Check } from 'lucide-react';
+import { Shield, DollarSign, Mic, MessageCircle, Copy, Check, ExternalLink } from 'lucide-react';
+
+// ============================================================
+// DISCORD LINK — change this to your server's invite URL
+const DISCORD_LINK = 'https://discord.gg/your-invite-here';
+// ============================================================
 
 const SERVER_IP = 'icerevival.aternos.me';
 
@@ -41,6 +46,29 @@ export default function Home() {
 
   return (
     <div ref={containerRef} className="relative">
+
+      {/* ── Fixed top-right Discord button ── always visible while scrolling ── */}
+      <a
+        href={DISCORD_LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed top-4 right-4 z-[9999] flex items-center gap-2 px-4 py-2 text-sm font-bold text-white select-none transition-all hover:brightness-110 active:translate-y-px"
+        style={{
+          fontFamily: 'Minecraft, monospace',
+          background: '#5865F2',
+          border: '2px solid',
+          borderTopColor: '#7289da',
+          borderLeftColor: '#7289da',
+          borderRightColor: '#3a4db5',
+          borderBottomColor: '#3a4db5',
+          textShadow: '1px 1px 0 rgba(0,0,0,0.4)',
+          imageRendering: 'pixelated',
+        }}
+      >
+        <ExternalLink size={14} />
+        Discord
+      </a>
+
       {/* Zone 1: Outside - Snowy Night */}
       <motion.section 
         className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
