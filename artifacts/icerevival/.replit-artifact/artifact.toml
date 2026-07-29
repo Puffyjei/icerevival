@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "IceRevival Minecraft Server"
+version = "1.0.0"
+id = "artifacts/icerevival"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21522
+
+[services.development]
+run = "pnpm --filter @workspace/icerevival run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/icerevival", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/icerevival/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21522"
+BASE_PATH = "/"
