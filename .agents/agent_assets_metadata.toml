@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "7KTFZwoVBhtlDZ96j6DPv"
+uri = "file://icerevival-site.zip"
+type = "unspecified"
+title = "IceRevival Site Code"
