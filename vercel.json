@@ -1,6 +1,0 @@
-{
-  "buildCommand": "pnpm --filter @workspace/icerevival run build",
-  "outputDirectory": "artifacts/icerevival/dist/public",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "framework": null
-}
